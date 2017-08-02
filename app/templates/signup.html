@@ -1,0 +1,12 @@
+{% extends "basic_layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %} Sign Up {% endblock %}
+{% block content %}
+    {{ super() }}
+    {% block styles %}
+        {{ super() }}
+    {% endblock %}
+
+    {{ wtf.quick_form(form) }}
+{% endblock %}
