@@ -8,5 +8,5 @@
         {{ super() }}
     {% endblock %}
 
-    {{ wtf.quick_form(form) }}
+    {{ wtf.quick_form(form,form_type="horizontal") }}
 {% endblock %}
