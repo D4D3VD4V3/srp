@@ -3,12 +3,15 @@ from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
 bar = Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"))
 nav = Nav()
 nav.register_element("bar", bar)
 db = SQLAlchemy()
+login = LoginManager()
+
 def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
@@ -17,6 +20,14 @@ def create_app():
     Bootstrap(app)
     nav.init_app(app)
     db.init_app(app)
+    login.init_app(app)
+    login.login_message = "You must login first"
+    login.login_view = "bp.login"
+
+    from .models import Login
+    @login.user_loader
+    def load_user(uid):
+        return Login.query.get(int(uid))
 
     from app.blueprints import bp
     app.register_blueprint(bp)
