@@ -48,7 +48,6 @@ class Professors(db.Model):
     qual = db.Column(db.String(50))
     pic = db.Column(db.LargeBinary)
     exp = db.Column(db.Integer)
-    # dept = db.Column(db.String(50))
     sub = db.Column(db.String(50), db.ForeignKey('subjects.sub'))
 
 class Subjects(db.Model):
@@ -61,8 +60,9 @@ class Subjects(db.Model):
 class Reviews(db.Model):
     __tablename__ = 'reviews'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    studentuid = db.Column(db.Integer)
-    professoruid = db.Column(db.Integer)
-    # __table_args__ = (db.ForeignKeyConstraint([studentuid, professoruid],
+    studentuid = db.Column(db.Integer, db.ForeignKey('login.uid'))
+    professoruid = db.Column(db.Integer, db.ForeignKey('professors.uid'))
+    # __table_args__ = (db.ForeignKeyConstraint(["studentuid", "professoruid"],
                                            # [Login.uid, Professors.uid]),{})
+    __table_args__ = (db.UniqueConstraint('studentuid','professoruid', name='compositeuid'),)
 
