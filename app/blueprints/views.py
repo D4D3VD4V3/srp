@@ -15,3 +15,10 @@ def signup():
         return redirect(url_for("bp.home"))
     return render_template("signup.html", form=form)
 
+@bp.route("/test")
+def test():
+    return render_template("newhome.html")
+
+@bp.route("/semester/<int:sem>")
+def semester():
+    return "It worked" + str(sem)

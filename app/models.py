@@ -63,6 +63,6 @@ class Reviews(db.Model):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     studentuid = db.Column(db.Integer)
     professoruid = db.Column(db.Integer)
-    __table_args__ = (db.ForeignKeyConstraint([studentuid, professoruid],
-                                           [Login.uid, Professors.uid]),{})
+    # __table_args__ = (db.ForeignKeyConstraint([studentuid, professoruid],
+                                           # [Login.uid, Professors.uid]),{})
 
