@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
 SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
-bar = Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"))
+bar = Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"), View("Login", "bp.login"))
 nav = Nav()
 nav.register_element("bar", bar)
 db = SQLAlchemy()
@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
 #TODO move to config.py
-    app.config["SQLALCHEMY_DATABASE_URI"]=r"sqlite://main.db"
+    app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///main.db"
     Bootstrap(app)
     nav.init_app(app)
     db.init_app(app)

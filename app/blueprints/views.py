@@ -14,10 +14,10 @@ def home():
 def signup():
     form = SignUpForm()
     if form.validate_on_submit():
-        if db.session.query(Login.uid).filter_by(email=form.data.Email_Address1).scalar() is not None:
+        if db.session.query(Login.uid).filter_by(email=form.Email_Address1.data).scalar() is not None:
             flash("The account already exists!")
         else:
-            user = Login(rollno=form.data.Roll_Number, email=form.data.Email_Address1, password=form.data.Password1, isadmin=False)
+            user = Login(rollno=form.Roll_Number.data, email=form.Email_Address1.data, password=form.Password1.data, isadmin=False)
             db.session.add(user)
             db.session.commit()
             return redirect(url_for("bp.home"))
@@ -27,8 +27,8 @@ def signup():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = Login.query.filter_by(email=form.data.Email_Address).first()
-        if user is not None and user.verify_password(form.data.Password):
+        user = Login.query.filter_by(email=form.Email_Address.data).first()
+        if user is not None and user.verify_password(form.Password.data):
             login_user(user)
             flash("Login successful")
             return redirect(url_for("bp.home"))
@@ -38,6 +38,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    flash("Successfully logged out")
     return render_template(url_for("bp.home"))
 
 
