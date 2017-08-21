@@ -13,7 +13,6 @@ class Login(db.Model, UserMixin):
     def check_password(self, passwd):
         return check_password_hash(self._passwordhash, passwd)
 
-    #Password getter
     @property
     def password(self):
         raise AttributeError("Nice try!")
@@ -62,7 +61,5 @@ class Reviews(db.Model):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     studentuid = db.Column(db.Integer, db.ForeignKey('login.uid'))
     professoruid = db.Column(db.Integer, db.ForeignKey('professors.uid'))
-    # __table_args__ = (db.ForeignKeyConstraint(["studentuid", "professoruid"],
-                                           # [Login.uid, Professors.uid]),{})
     __table_args__ = (db.UniqueConstraint('studentuid','professoruid', name='compositeuid'),)
 
