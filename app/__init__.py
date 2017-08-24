@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
 #TODO move to config.py
-    app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///main.db"
+    app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:///db/main.db"
     Bootstrap(app)
     nav.init_app(app)
     db.init_app(app)
@@ -31,7 +31,8 @@ def create_app():
 
     from app.blueprints import bp
     app.register_blueprint(bp)
-    
+
+#TODO templates
     @app.errorhandler(404)
     def pagenotfound(_):
         return render_template("404.html")
@@ -39,5 +40,5 @@ def create_app():
     @app.errorhandler(500)
     def servererror(_):
         return render_template("500.html")
-    
+
     return app

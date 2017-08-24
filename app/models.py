@@ -2,6 +2,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 from . import db
 
+
 class Login(db.Model, UserMixin):
     __tablename__ = 'login'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -39,6 +40,7 @@ class Login(db.Model, UserMixin):
     def get_id(self):
         return self.uid
 
+
 class Professors(db.Model):
     __tablename__ = 'professors'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -49,6 +51,7 @@ class Professors(db.Model):
     exp = db.Column(db.Integer)
     sub = db.Column(db.String(50), db.ForeignKey('subjects.sub'))
 
+
 class Subjects(db.Model):
     __tablename__ = 'subjects'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -56,10 +59,10 @@ class Subjects(db.Model):
     sub = db.Column(db.String(50))
     prof = db.Column(db.String(50), db.ForeignKey('professors.name'))
 
+
 class Reviews(db.Model):
     __tablename__ = 'reviews'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     studentuid = db.Column(db.Integer, db.ForeignKey('login.uid'))
     professoruid = db.Column(db.Integer, db.ForeignKey('professors.uid'))
-    __table_args__ = (db.UniqueConstraint('studentuid','professoruid', name='compositeuid'),)
-
+    __table_args__ = (db.UniqueConstraint('studentuid', 'professoruid', name='compositeuid'),)
