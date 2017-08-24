@@ -10,6 +10,7 @@ from flask_login import login_user, login_required, logout_user
 def home():
     return render_template("home.html")
 
+
 @bp.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignUpForm()
@@ -17,11 +18,16 @@ def signup():
         if db.session.query(Login.uid).filter_by(email=form.Email_Address1.data).scalar() is not None:
             flash("The account already exists!")
         else:
-            user = Login(rollno=form.Roll_Number.data, email=form.Email_Address1.data, password=form.Password1.data, isadmin=False)
+            user = Login(
+                rollno=form.Roll_Number.data,
+                email=form.Email_Address1.data,
+                password=form.Password1.data,
+                isadmin=False)
             db.session.add(user)
             db.session.commit()
             return redirect(url_for("bp.home"))
     return render_template("signup.html", form=form)
+
 
 @bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -34,6 +40,7 @@ def login():
             return redirect(url_for("bp.home"))
     return render_template("login.html", form=form)
 
+
 @bp.route("/logout", methods=["GET", "POST"])
 @login_required
 def logout():
@@ -45,6 +52,7 @@ def logout():
 @bp.route("/test")
 def test():
     return render_template("newhome.html")
+
 
 @bp.route("/semester/<int:sem>")
 def semester(sem):

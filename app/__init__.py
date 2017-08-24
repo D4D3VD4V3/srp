@@ -3,12 +3,17 @@ from flask_bootstrap import Bootstrap
 from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 
 SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
-bar = Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"), View("Login", "bp.login"))
 nav = Nav()
-nav.register_element("bar", bar)
+
+@nav.navigation(id='bar')
+def bar():
+    if current_user.is_authenticated:
+        return Navbar(View("Home", "bp.home"), View("Log out", "bp.logout"))
+    return Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"), View("Login", "bp.login"))
+
 db = SQLAlchemy()
 login = LoginManager()
 
