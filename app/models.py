@@ -44,12 +44,18 @@ class Login(db.Model, UserMixin):
 class Professors(db.Model):
     __tablename__ = 'professors'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), db.ForeignKey('professorsnames.name'))
     spec = db.Column(db.String(50))
     qual = db.Column(db.String(50))
     pic = db.Column(db.LargeBinary)
     exp = db.Column(db.Integer)
-    sub = db.Column(db.String(50), db.ForeignKey('subjects.sub'))
+    sub = db.Column(db.String(50), db.ForeignKey('subjectsnames.name'))
+
+
+class ProfessorsNames(db.Model):
+    __tablename__ = "professorsnames"
+    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50))
 
 
 class Subjects(db.Model):
@@ -57,7 +63,13 @@ class Subjects(db.Model):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     sem = db.Column(db.Integer)
     sub = db.Column(db.String(50))
-    prof = db.Column(db.String(50), db.ForeignKey('professors.name'))
+    prof = db.Column(db.String(50), db.ForeignKey('professorsnames.name'))
+
+
+class SubjectsNames(db.Model):
+    __tablename__ = "subjectsnames"
+    uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50))
 
 
 class Reviews(db.Model):
