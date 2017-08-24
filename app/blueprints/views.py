@@ -46,7 +46,7 @@ def login():
 def logout():
     logout_user()
     flash("Successfully logged out")
-    return render_template(url_for("bp.home"))
+    return redirect(url_for("bp.home"))
 
 
 @bp.route("/test")
