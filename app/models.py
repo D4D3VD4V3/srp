@@ -55,7 +55,7 @@ class Professors(db.Model):
 class ProfessorsNames(db.Model):
     __tablename__ = "professorsnames"
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
 
 
 class Subjects(db.Model):
@@ -69,7 +69,7 @@ class Subjects(db.Model):
 class SubjectsNames(db.Model):
     __tablename__ = "subjectsnames"
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
 
 
 class Reviews(db.Model):
