@@ -1,7 +1,7 @@
 from random import choice, randint
 from flask_script import Manager, Command
 from app import create_app
-from app.models import SubjectsNames, ProfessorsNames, Subjects, Professors
+from app.models import SubjectsNames, ProfessorsNames, Subjects, Professors, Login
 
 manager = Manager(create_app)
 
@@ -13,7 +13,7 @@ class CreateDB(Command):
         db.create_all()
         subs = ["Computer Networks", "Unix Internals", "Digital Communications",
                 "Digital Principles and Design", "Computer Architecture",
-                "Fundamentals of Computing", "Engineering Graphics",
+                "Digital Signal Processing", "Engineering Graphics",
                 "Operating Systems", "Discrete Mathematics"]
 
         profs = ["Prof " + chr(i) for i in range(65, 91)]
@@ -27,6 +27,15 @@ class CreateDB(Command):
         for i in range(1, 9):
             for j in range(randint(5, 7)):
                 db.session.add(Subjects(sem=i, sub=choice(subs), prof=choice(profs)))
+
+        for name in profs:
+            db.session.add(
+                Professors(
+                    name=name, spec=choice(subs),
+                    qual=choice(["Master's", "PhD"]) + " in " + choice(subs),
+                    exp=randint(2, 20)))
+
+        db.session.add(Login(rollno=00000000, email="admin@admin.com", password="password", isadmin=1))
 
         db.session.commit()
 

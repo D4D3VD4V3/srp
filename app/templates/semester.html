@@ -1,0 +1,14 @@
+{% extends "basic_layout.html" %}
+
+{% block title %} Subjects {% endblock %}
+{% block content %}
+    {{ super() }}
+    {% block styles %}
+        {{ super() }}
+    {% endblock %}
+    <div class="container">
+            {% for sub in subs %}
+                <a class="btn btn-default" href="{{ url_for("bp.subject", subid=sub|urlencode )}}"> {{ sub }} </a>
+            {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "basic_layout.html" %}
+
+{% block title %} Professors {% endblock %}
+{% block content %}
+    {{ super() }}
+    {% block styles %}
+        {{ super() }}
+    {% endblock %}
+    <div class="container">
+            {% for prof in profs %}
+                <a class="btn btn-default" href="{{ url_for("bp.professor", profid=prof|urlencode )}}"> {{ prof }} </a>
+            {% endfor %}
+    </div>
+{% endblock %}
+

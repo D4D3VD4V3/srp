@@ -1,0 +1,21 @@
+{% extends "basic_layout.html" %}
+
+{% block title %} Subjects {% endblock %}
+{% block content %}
+    {{ super() }}
+    {% block styles %}
+        {{ super() }}
+    {% endblock %}
+    <div class="container">
+        Professor Name: {{ prof.name }} <br>
+        Speciality: {{ prof.spec }} <br>
+        Qualification: {{ prof.qual }} <br>
+        Experience: {{ prof.exp }} years <br>
+
+        
+        {% if current_user.is_authenticated %}
+            <a class="btn btn-default" href="{{ url_for("bp.review", name=prof.name|urlencode)}}"> Review </a>
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -11,5 +11,8 @@
 	    </div>
     </div>
     <div>
+            {% for sem in range(1,9) %}
+                <button><a href="{{ url_for("bp.semester",sem=sem) }}">{{ sem }} Semester</a></button>
+            {% endfor %}
     </div>
 {% endblock %}
