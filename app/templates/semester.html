@@ -7,8 +7,10 @@
         {{ super() }}
     {% endblock %}
     <div class="container">
+        <div class="list-group">
             {% for sub in subs %}
-                <a class="btn btn-default" href="{{ url_for("bp.subject", subid=sub|urlencode )}}"> {{ sub }} </a>
+                <a class="btn btn-default list-group-item" href="{{ url_for("bp.subject", subid=sub|urlencode )}}"> {{ sub }} </a>
             {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -1,22 +1,16 @@
 {% extends "basic_layout.html" %}
 
+{% block title %} Subjects {% endblock %}
 {% block content %}
     {{ super() }}
-
     {% block styles %}
-    {{ super() }}
-        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="home.css")}}">
+        {{ super() }}
     {% endblock %}
-
-    <body>
-        <div class="bg"> 
-            <img align="left" src="{{ url_for("static", filename="annalogo.jpg") }}" width="200" height="200">
-            <div class="ex">
-                {% for sem in range(1,9) %}
-                    <button class="button1"><a href="{{ url_for("bp.semester",sem=sem) }}">{{ sem }} Semester</a></button>
-                {% endfor %}
-            </div>
+    <div class="container">
+        <div class="list-group">
+            {% for sem in range(1,9) %}
+                <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }} Semester </a>
+            {% endfor %}
         </div>
-    </body>
-
+    </div>
 {% endblock %}

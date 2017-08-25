@@ -7,9 +7,11 @@
         {{ super() }}
     {% endblock %}
     <div class="container">
+        <div class="list-group">
             {% for prof in profs %}
-                <a class="btn btn-default" href="{{ url_for("bp.professor", profid=prof|urlencode )}}"> {{ prof }} </a>
+                <a class="btn btn-default list-group-item" href="{{ url_for("bp.professor", profid=prof|urlencode )}}"> {{ prof }} </a>
             {% endfor %}
+        </div>
     </div>
 {% endblock %}
 
