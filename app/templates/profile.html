@@ -5,7 +5,11 @@
     {{ super() }}
     {% block styles %}
         {{ super() }}
+        <link href=" {{ url_for("static", filename="css/star-rating.min.css") }}" media="all" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     {% endblock %}
+
+
     <div class="container">
         Professor Name: {{ prof.name }} <br>
         Speciality: {{ prof.spec }} <br>
@@ -14,8 +18,10 @@
 
         
         {% if current_user.is_authenticated %}
+<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
             <a class="btn btn-default" href="{{ url_for("bp.review", name=prof.name|urlencode)}}"> Review </a>
         {% endif %}
+    <script type="text/javascript" src="{{ url_for("static", filename="js/star-rating.min.js") }}"></script>
     </div>
 {% endblock %}
 

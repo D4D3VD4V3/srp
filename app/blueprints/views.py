@@ -50,11 +50,6 @@ def logout():
     return redirect(url_for("bp.home"))
 
 
-@bp.route("/test")
-def test():
-    return render_template("newhome.html")
-
-
 @bp.route("/semester/<int:sem>")
 def semester(sem):
     subs = Subjects.query.filter_by(sem=sem).all()
@@ -78,3 +73,8 @@ def professor(profid):
 @bp.route("/review/<name>")
 def review(name):
     return unquote(name)
+
+
+@bp.route("/test")
+def test():
+    return render_template("startest.html")

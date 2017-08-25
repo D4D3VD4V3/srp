@@ -77,4 +77,9 @@ class Reviews(db.Model):
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     studentuid = db.Column(db.Integer, db.ForeignKey('login.uid'))
     professoruid = db.Column(db.Integer, db.ForeignKey('professors.uid'))
+    punctual = db.Column(db.Boolean)
+    deathbypowerpoint = db.Column(db.Boolean)
+    fairpaperevaluation = db.Column(db.Boolean)
+    quality = db.Column(db.Integer)
+
     __table_args__ = (db.UniqueConstraint('studentuid', 'professoruid', name='compositeuid'),)
