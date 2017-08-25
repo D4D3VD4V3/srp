@@ -2,6 +2,7 @@ from random import choice, randint
 from flask_script import Manager, Command
 from app import create_app
 from app.models import SubjectsNames, ProfessorsNames, Subjects, Professors, Login
+import mimesis
 
 manager = Manager(create_app)
 
@@ -16,7 +17,8 @@ class CreateDB(Command):
                 "Digital Signal Processing", "Engineering Graphics",
                 "Operating Systems", "Discrete Mathematics"]
 
-        profs = ["Prof " + chr(i) for i in range(65, 91)]
+        p = mimesis.Personal(locale='en')
+        profs = [p.full_name() for i in range(20)]
 
         for i in subs:
             db.session.add(SubjectsNames(name=i))
