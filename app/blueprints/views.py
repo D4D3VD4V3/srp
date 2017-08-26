@@ -1,7 +1,7 @@
 from urllib.parse import unquote
 from flask import render_template, flash, url_for, redirect
 from . import bp
-from app.forms import SignUpForm, LoginForm
+from app.forms import SignUpForm, LoginForm, ReviewForm
 from app.models import Login, Subjects, Professors
 from app import db
 from flask_login import login_user, login_required, logout_user
@@ -64,17 +64,15 @@ def subject(subid):
     return render_template("subject.html", profs=proflist)
 
 
-@bp.route("/professor/<profid>")
+@bp.route("/professor/<profid>", methods=["GET", "POST"])
 def professor(profid):
+    form = ReviewForm()
+    if form.validate_on_submit():
+        flash("rating:" + str(form.Rating.data), "success")
     prof = Professors.query.filter_by(name=unquote(profid)).first()
-    return render_template("profile.html", prof=prof)
+    return render_template("profile.html", prof=prof, form=form)
 
 
-@bp.route("/review/<name>")
-def review(name):
-    return unquote(name)
-
-
-@bp.route("/test")
-def test():
-    return render_template("startest.html")
+# @bp.route("/review/<name>")
+# def review(name):
+    # return unquote(name)

@@ -1,5 +1,5 @@
 {% extends "basic_layout.html" %}
-
+{% from "macros.html" import render_field %}
 {% block title %} Subjects {% endblock %}
 {% block content %}
     {{ super() }}
@@ -18,10 +18,32 @@
 
         
         {% if current_user.is_authenticated %}
-<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1">
-            <a class="btn btn-default" href="{{ url_for("bp.review", name=prof.name|urlencode)}}"> Review </a>
-        {% endif %}
+        <form method="post" action="">
+            <dl>
+                {{ render_field(form.Punctual) }}
+                {{ render_field(form.DeathByPPT) }}
+                {{ render_field(form.FairPaperEvaluation) }}
+                {{ render_field(form.Rating, id="hiddenrating") }}
+                <input data-size="xs" id="star-input" name="input-1" class="rating" data-min="0" data-max="5" data-step="1">
+                {{ render_field(form.Submit, class="btn btn-default") }}
+            </dl>
+
     <script type="text/javascript" src="{{ url_for("static", filename="js/star-rating.min.js") }}"></script>
+    <script>
+            $(document).ready(function(){
+                $('.rating').on('change', function(event, value, caption) {
+                $('#hiddenrating').val(value);
+
+                });
+                $('#star-input').on('rating.hover', function(event, value, caption) {
+                $('#hiddenrating').val(value);
+                alert("The rating you've given is " + value);
+            });
+        });
+    </script>
+
+        </form>
+        {% endif %}
     </div>
 {% endblock %}
 

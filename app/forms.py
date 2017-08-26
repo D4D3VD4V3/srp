@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, DecimalField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from .models import Login 
 
@@ -26,4 +26,12 @@ class SignUpForm(FlaskForm):
 class LoginForm(FlaskForm):
     Email_Address = StringField("Email address", validators=[DataRequired("Please enter your email address"), Email(message="Please enter a valid email address")])
     Password = PasswordField("Password", validators=[DataRequired('Please enter a password'), Length(min=8, max=256, message="Please enter a password between 8 and 256 characters inclusive")])
+    Submit = SubmitField("Submit")
+
+
+class ReviewForm(FlaskForm):
+    Punctual = BooleanField("Is the professor punctual?:")
+    DeathByPPT = BooleanField("Does the professor rely only on ppt's?:")
+    FairPaperEvaluation = BooleanField("Does the professor evaluate question papers in a fair manner?:")
+    Rating = DecimalField()
     Submit = SubmitField("Submit")
