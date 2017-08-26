@@ -42,8 +42,10 @@ def create_app():
     def load_user(uid):
         return Login.query.get(int(uid))
 
-    from app.blueprints import bp
+    from app.blueprints.general import bp
+    from app.blueprints.admin import admin_bp
     app.register_blueprint(bp)
+    app.register_blueprint(admin_bp, url_prefix="/admin")
 
     @app.errorhandler(404)
     def pagenotfound(_):
