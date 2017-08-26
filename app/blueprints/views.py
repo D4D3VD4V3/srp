@@ -40,7 +40,10 @@ def login():
         if user is not None and user.verify_password(form.Password.data):
             login_user(user)
             flash("Login successful", "success")
-            return redirect(unquote(nexturl))
+            if nexturl:
+                return redirect(nexturl)
+            else:
+                return redirect(url_for("bp.home"))
     return render_template("login.html", form=form)
 
 
