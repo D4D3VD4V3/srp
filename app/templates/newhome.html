@@ -9,7 +9,15 @@
     <div class="container">
         <div class="list-group">
             {% for sem in range(1,9) %}
-                <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }} Semester </a>
+                {% if sem==1 %}
+                <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }}<sup>st</sup> Semester </a>
+                {% elif sem==2 %}
+                    <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }}<sup>nd</sup> Semester </a>
+                {% elif sem==3 %}
+                    <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }}<sup>rd</sup> Semester </a>
+                {% else %}
+                    <a class="btn btn-default list-group-item" href="{{ url_for("bp.semester", sem=sem )}}"> {{ sem }}<sup>th</sup> Semester </a>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
