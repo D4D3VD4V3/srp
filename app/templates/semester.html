@@ -7,6 +7,9 @@
         {{ super() }}
     {% endblock %}
     <div class="container">
+        <div class="jumbotron">
+            <h3 align="center">2. Choose the subject for which you want to review a professor</h3>
+        </div>
         <div class="list-group">
             {% for sub in subs %}
                 <a class="btn btn-default list-group-item" href="{{ url_for("bp.subject", subid=sub|urlencode )}}"> {{ sub }} </a>

@@ -7,6 +7,9 @@
         {{ super() }}
     {% endblock %}
     <div class="container">
+        <div class="jumbotron">
+            <h3 align="center">1. Choose your current semester</h3>
+        </div>
         <div class="list-group">
             {% for sem in range(1,9) %}
                 {% if sem==1 %}

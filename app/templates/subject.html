@@ -7,6 +7,9 @@
         {{ super() }}
     {% endblock %}
     <div class="container">
+        <div class="jumbotron">
+            <h3 align="center">3. Choose a professor</h3>
+        </div>
         <div class="list-group">
             {% for prof in profs %}
                 <a class="btn btn-default list-group-item" href="{{ url_for("bp.professor", profid=prof|urlencode )}}"> {{ prof }} </a>

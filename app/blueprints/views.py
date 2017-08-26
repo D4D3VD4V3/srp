@@ -1,5 +1,5 @@
 from urllib.parse import unquote
-from flask import render_template, flash, url_for, redirect
+from flask import render_template, flash, url_for, redirect, request
 from . import bp
 from app.forms import SignUpForm, LoginForm, ReviewForm
 from app.models import Login, Subjects, Professors, Reviews
@@ -39,6 +39,7 @@ def login():
         if user is not None and user.verify_password(form.Password.data):
             login_user(user)
             flash("Login successful", "success")
+            print(request.referrer)
             return redirect(url_for("bp.home"))
     return render_template("login.html", form=form)
 
