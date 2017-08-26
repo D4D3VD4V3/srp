@@ -100,3 +100,9 @@ def professor(profid):
             statistics["rating"] += stat.rating
 
     return render_template("profile.html", prof=prof, form=form, statistics=statistics)
+
+
+@bp.after_request
+def cache(response):
+    response.headers.add('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0')
+    return response
