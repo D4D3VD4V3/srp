@@ -34,13 +34,13 @@ def signup():
 @bp.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    nexturl = request.args.get('next')
     if form.validate_on_submit():
         user = Login.query.filter_by(email=form.Email_Address.data).first()
         if user is not None and user.verify_password(form.Password.data):
             login_user(user)
             flash("Login successful", "success")
-            print(request.referrer)
-            return redirect(url_for("bp.home"))
+            return redirect(unquote(nexturl))
     return render_template("login.html", form=form)
 
 
@@ -86,6 +86,8 @@ def professor(profid):
             flash("Review submitted successfully", "success")
         else:
             flash("You've already reviewed this professor. Only one review per student", "danger")
+    if current_user.is_authenticated is False:
+        flash("You cannot leave a review unless you're logged in", "danger")
     fields = ["punctual", "deathbypowerpoint", "fairpaperevaluation", "rating"]
     statistics = {k: 0 for k in fields}
     stats = Reviews.query.filter_by(professoruid=prof.uid).all()
