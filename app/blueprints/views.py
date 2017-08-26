@@ -5,7 +5,6 @@ from app.forms import SignUpForm, LoginForm, ReviewForm
 from app.models import Login, Subjects, Professors, Reviews
 from app import db
 from flask_login import login_user, login_required, logout_user, current_user
-from sqlalchemy import and_
 
 
 @bp.route("/")
@@ -27,7 +26,8 @@ def signup():
                 isadmin=False)
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for("bp.home"))
+            flash("Account created successfully. Please login now", "success")
+            return redirect(url_for("bp.login"))
     return render_template("signup.html", form=form)
 
 
@@ -70,8 +70,9 @@ def professor(profid):
     prof = Professors.query.filter_by(name=unquote(profid)).first()
     form = ReviewForm()
     if form.validate_on_submit():
-        if Reviews.query.filter(and_(Reviews.studentuid == current_user.get_id(),
-                                     Reviews.professoruid == prof.uid)).all() is None:
+        if db.session.query(Reviews).filter(
+                Reviews.studentuid == current_user.get_id()).filter(
+                Reviews.professoruid == prof.uid).one_or_none() is None:
             review = Reviews(
                 studentuid=int(current_user.get_id()),
                 professoruid=int(prof.uid),
@@ -81,7 +82,21 @@ def professor(profid):
                 rating=form.Rating.data)
             db.session.add(review)
             db.session.commit()
+            flash("Review submitted successfully", "success")
         else:
-            flash("You've already reviewed this professor. Only one review per student", "success")
+            flash("You've already reviewed this professor. Only one review per student", "danger")
+    fields = ["punctual", "deathbypowerpoint", "fairpaperevaluation", "rating"]
+    statistics = {k: 0 for k in fields}
+    stats = Reviews.query.filter_by(professoruid=prof.uid).all()
+    count = len(stats)
+    print(count)
+    if stats is not None:
+        for stat in stats:
+            # for i in fields:
+            # statistics[i] += stat[i]
+            statistics["punctual"] += stat.punctual
+            statistics["deathbypowerpoint"] += stat.deathbypowerpoint
+            statistics["fairpaperevaluation"] += stat.fairpaperevaluation
+            statistics["rating"] += stat.rating
 
-    return render_template("profile.html", prof=prof, form=form)
+    return render_template("profile.html", prof=prof, form=form, statistics=statistics)

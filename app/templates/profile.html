@@ -42,6 +42,12 @@
 
         </form>
         {% endif %}
+
+        {% for key, value in statistics.items() %}
+
+        {{ key }}: {{ value }}<br>
+
+        {% endfor %}
     </div>
 {% endblock %}
 
