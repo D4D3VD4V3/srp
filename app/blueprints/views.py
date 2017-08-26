@@ -71,8 +71,8 @@ def professor(profid):
     form = ReviewForm()
     if form.validate_on_submit():
         if db.session.query(Reviews).filter(
-                Reviews.studentuid == current_user.get_id()).filter(
-                Reviews.professoruid == prof.uid).one_or_none() is None:
+                        Reviews.studentuid == current_user.get_id()).filter(
+                    Reviews.professoruid == prof.uid).one_or_none() is None:
             review = Reviews(
                 studentuid=int(current_user.get_id()),
                 professoruid=int(prof.uid),

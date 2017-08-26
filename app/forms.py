@@ -18,7 +18,7 @@ class SignUpForm(FlaskForm):
                               validators=[DataRequired('Please enter a password'),
                                           Length(min=8, max=256,
                                                  message="Please enter a password between 8 and 256"
-                                                 "characters inclusive")])
+                                                         "characters inclusive")])
     Password2 = PasswordField("Confirm password", validators=[EqualTo("Password1", message="Passwords must match")])
     Submit = SubmitField("Submit")
 
@@ -37,7 +37,7 @@ class LoginForm(FlaskForm):
     Password = PasswordField("Password", validators=[DataRequired('Please enter a password'),
                                                      Length(min=8, max=256,
                                                             message="Please enter a password between 8 and 256"
-                                                            "characters inclusive")])
+                                                                    "characters inclusive")])
     Submit = SubmitField("Submit")
 
 

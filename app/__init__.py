@@ -23,7 +23,6 @@ login = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
-# TODO move to config.py
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/main.db"
     Bootstrap(app)
     nav.init_app(app)
