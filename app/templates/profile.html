@@ -5,7 +5,7 @@
     {{ super() }}
     {% block styles %}
         {{ super() }}
-        <link href=" {{ url_for("static", filename="css/star-rating.min.css") }}" media="all" rel="stylesheet" type="text/css" />
+        <link href=" {{ url_for("static", filename="css/rating.min.css") }}" media="all" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     {% endblock %}
 
@@ -23,23 +23,20 @@
                 {{ render_field(form.Punctual) }}
                 {{ render_field(form.DeathByPPT) }}
                 {{ render_field(form.FairPaperEvaluation) }}
-                {{ render_field(form.Rating, id="hiddenrating") }}
-                <input data-size="xs" id="star-input" name="input-1" class="rating" data-min="0" data-max="5" data-step="1">
+                {{ render_field(form.Rating, id="hiddenrating", type="hidden") }}
+                <div id="star" class="c-rating"></div>
                 {{ render_field(form.Submit, class="btn btn-default") }}
             </dl>
 
-    <script type="text/javascript" src="{{ url_for("static", filename="js/star-rating.min.js") }}"></script>
+    <script type="text/javascript" src="{{ url_for("static", filename="js/rating.min.js") }}"></script>
     <script>
-            $(document).ready(function(){
-                $('.rating').on('change', function(event, value, caption) {
-                $('#hiddenrating').val(value);
+        var el = document.querySelector('#star');
+        var initial = 0;
+        var maxRating = 5;
+        var callback = function(rating) { 
+                        $("#hiddenrating").val(rating);};
+        var myRating = rating(el, initial, maxRating, callback);
 
-                });
-                $('#star-input').on('rating.hover', function(event, value, caption) {
-                $('#hiddenrating').val(value);
-                alert("The rating you've given is " + value);
-            });
-        });
     </script>
 
         </form>
