@@ -20,6 +20,7 @@
         {% if current_user.is_authenticated %}
         <form method="post" action="">
             <dl>
+                {{ form.csrf_token }}
                 {{ render_field(form.Punctual) }}
                 {{ render_field(form.DeathByPPT) }}
                 {{ render_field(form.FairPaperEvaluation) }}

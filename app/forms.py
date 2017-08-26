@@ -1,7 +1,10 @@
+from urllib.parse import unquote
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, DecimalField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
-from .models import Login 
+from .models import Login, Reviews
+# from flask_sqlalchemy import and_
+# from flask_login import current_user
 
 
 class SignUpForm(FlaskForm):
@@ -33,5 +36,9 @@ class ReviewForm(FlaskForm):
     Punctual = BooleanField("Is the professor punctual?:")
     DeathByPPT = BooleanField("Does the professor rely only on ppt's?:")
     FairPaperEvaluation = BooleanField("Does the professor evaluate question papers in a fair manner?:")
-    Rating = DecimalField()
+    Rating = IntegerField()
     Submit = SubmitField("Submit")
+
+    # def validate_Submit(self, field):
+        # Reviews.query.filter_by(and_(Reviews.studentuid==current_user.get_id(), professoruid==))
+

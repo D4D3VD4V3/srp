@@ -2,9 +2,10 @@ from urllib.parse import unquote
 from flask import render_template, flash, url_for, redirect
 from . import bp
 from app.forms import SignUpForm, LoginForm, ReviewForm
-from app.models import Login, Subjects, Professors
+from app.models import Login, Subjects, Professors, Reviews
 from app import db
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy import and_
 
 
 @bp.route("/")
@@ -66,13 +67,21 @@ def subject(subid):
 
 @bp.route("/professor/<profid>", methods=["GET", "POST"])
 def professor(profid):
+    prof = Professors.query.filter_by(name=unquote(profid)).first()
     form = ReviewForm()
     if form.validate_on_submit():
-        flash("rating:" + str(form.Rating.data), "success")
-    prof = Professors.query.filter_by(name=unquote(profid)).first()
+        if Reviews.query.filter(and_(Reviews.studentuid == current_user.get_id(),
+                                     Reviews.professoruid == prof.uid)).all() is None:
+            review = Reviews(
+                studentuid=int(current_user.get_id()),
+                professoruid=int(prof.uid),
+                punctual=form.Punctual.data,
+                deathbypowerpoint=form.DeathByPPT.data,
+                fairpaperevaluation=form.FairPaperEvaluation.data,
+                rating=form.Rating.data)
+            db.session.add(review)
+            db.session.commit()
+        else:
+            flash("You've already reviewed this professor. Only one review per student", "success")
+
     return render_template("profile.html", prof=prof, form=form)
-
-
-# @bp.route("/review/<name>")
-# def review(name):
-    # return unquote(name)

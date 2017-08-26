@@ -80,6 +80,6 @@ class Reviews(db.Model):
     punctual = db.Column(db.Boolean)
     deathbypowerpoint = db.Column(db.Boolean)
     fairpaperevaluation = db.Column(db.Boolean)
-    quality = db.Column(db.Integer)
+    rating = db.Column(db.Integer)
 
     __table_args__ = (db.UniqueConstraint('studentuid', 'professoruid', name='compositeuid'),)
