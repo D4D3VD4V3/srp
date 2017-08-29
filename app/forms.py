@@ -38,6 +38,7 @@ class LoginForm(FlaskForm):
                                                      Length(min=8, max=256,
                                                             message="Please enter a password between 8 and 256"
                                                                     "characters inclusive")])
+    RememberMe = BooleanField("Remember Me")
     Submit = SubmitField("Submit")
 
 
