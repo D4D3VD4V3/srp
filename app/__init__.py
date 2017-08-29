@@ -12,13 +12,10 @@ nav = Nav()
 @nav.navigation(id='bar')
 def bar():
     if current_user.is_authenticated:
-        from .models import Login
         return Navbar(
             View(
                 "Home", "bp.home"), View(
-                "Log out", "bp.logout"), Text(
-                Login.query.filter_by(
-                    uid=current_user.get_id()).first().email))
+                "Log out", "bp.logout"), Text(current_user.email))
     return Navbar(
         View(
             "Home", "bp.home"), View(
