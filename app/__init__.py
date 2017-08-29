@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
-from flask_nav.elements import Navbar, View, Text
+from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 
@@ -12,15 +12,8 @@ nav = Nav()
 @nav.navigation(id='bar')
 def bar():
     if current_user.is_authenticated:
-        return Navbar(
-            View(
-                "Home", "bp.home"), View(
-                "Log out", "bp.logout"), Text(current_user.email))
-    return Navbar(
-        View(
-            "Home", "bp.home"), View(
-            "Sign Up", "bp.signup"), View(
-                "Login", "bp.login", next=request.path))
+        return Navbar(View("Home", "bp.home"), View("".join(["Log out (", current_user.email, ")"]), "bp.logout"))
+    return Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"), View("Login", "bp.login", next=request.path))
 
 
 db = SQLAlchemy()
