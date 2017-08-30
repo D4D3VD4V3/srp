@@ -12,12 +12,8 @@ nav = Nav()
 @nav.navigation(id='bar')
 def bar():
     if current_user.is_authenticated:
-        return Navbar(View("Home", "bp.home"), View("Log out", "bp.logout"))
-    return Navbar(
-        View(
-            "Home", "bp.home"), View(
-            "Sign Up", "bp.signup"), View(
-                "Login", "bp.login", next=request.path))
+        return Navbar(View("Home", "bp.home"), View("".join(["Log out (", current_user.email, ")"]), "bp.logout"))
+    return Navbar(View("Home", "bp.home"), View("Sign Up", "bp.signup"), View("Login", "bp.login", next=request.path))
 
 
 db = SQLAlchemy()

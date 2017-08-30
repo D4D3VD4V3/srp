@@ -38,7 +38,7 @@ def login():
     if form.validate_on_submit():
         user = Login.query.filter_by(email=form.Email_Address.data).first()
         if user is not None and user.verify_password(form.Password.data):
-            login_user(user)
+            login_user(user, remember=form.RememberMe.data)
             flash("Login successful", "success")
             if nexturl:
                 return redirect(nexturl)
