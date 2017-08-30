@@ -7,7 +7,9 @@ from app import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 
+
 @admin_bp.route('/')
 def home():
     return "test"
+
 
