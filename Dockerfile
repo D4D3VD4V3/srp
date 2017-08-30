@@ -1,12 +1,11 @@
-FROM python:3.6-alpine3.6
+FROM python:3.6-slim
 
 ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
-#pip install --upgrade setuptools
-#easy_install --upgrade requests
+ENV DOCKER_HOST=127.0.0.1:8000
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
