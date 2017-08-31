@@ -1,3 +1,4 @@
+from os import makedirs, path
 from random import choice, randint
 from flask_script import Manager, Command
 from app import create_app
@@ -10,6 +11,9 @@ manager = Manager(create_app)
 class CreateDB(Command):
 
     def run(self):
+        if not path.exists(path.join(path.dirname(__file__), 'app', 'db')):
+            makedirs(path.join(path.dirname(__file__), 'app', 'db'))
+
         from app import db
         db.create_all()
         subs = ["Computer Networks", "Unix Internals", "Digital Communications",
