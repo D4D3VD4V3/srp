@@ -38,7 +38,6 @@ class CreateDB(Command):
                     exp=randint(2, 20)))
 
         db.session.add(Login(rollno=00000000, email="admin@admin.com", password="password", isadmin=1))
-
         db.session.commit()
 
 
