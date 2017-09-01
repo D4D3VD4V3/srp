@@ -5,12 +5,11 @@
     {{ super() }}
     {% block styles %}
         {{ super() }}
+        <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/horsey.min.css") }}">
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     {% endblock %}
     <div class="container">
-        <div id="bloodhound">
-            <input class="typeahead tt-input" autocomplete="off" spellcheck="false" type="text" placeholder="Search for professors">
-        </div>
+            <input autocomplete="off" spellcheck="false" type="text" placeholder="Search for professors">
         <div class="jumbotron">
             <h3 align="center">1. Choose your current semester</h3>
         </div>
@@ -27,17 +26,10 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <script type="text/javascript" src="{{ url_for("static", filename="js/horsey.min.js") }}"></script>
         <script>
-
-        var professors = new Bloodhound({
-        
-          datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
-          queryTokenizer: Bloodhound.tokenizers.whitespace,
-          prefetch:"{{ url_for("bp.data") }}"
-        });
-        $('#prefetch .typeahead').typeahead(null, {
-          name: 'professors',
-          source: professors
+        horsey(document.querySelector('input'), {
+          source: [{ list: ['banana', 'apple', 'orange'] }]
         });
         </script>
     </div>
