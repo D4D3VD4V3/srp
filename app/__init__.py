@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
@@ -5,7 +6,7 @@ from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 
-SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
+SECRET_KEY = os.environ["SECRET_KEY"]
 nav = Nav()
 
 
@@ -23,7 +24,7 @@ login = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.secret_key = SECRET_KEY
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/main.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ["DATABASE_URL"]
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     Bootstrap(app)
     nav.init_app(app)
