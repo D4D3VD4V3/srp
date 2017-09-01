@@ -44,6 +44,7 @@ def login():
                 return redirect(nexturl)
             else:
                 return redirect(url_for("bp.home"))
+        flash("Invalid credentials", "danger")
     return render_template("login.html", form=form)
 
 
@@ -71,11 +72,19 @@ def subject(subid):
 
 @bp.route("/professor/<profid>", methods=["GET", "POST"])
 def professor(profid):
+    #TODO Check param's veracity
     prof = Professors.query.filter_by(name=unquote(profid)).first()
     form = ReviewForm()
+    disabled="False"
+    #Doesn't get called after form submission
+    if db.session.query(Reviews).filter(
+                Reviews.studentuid == current_user.get_id()).filter(
+                Reviews.professoruid == prof.uid).one_or_none() is not None:
+        disabled="True"
+        flash("You've already reviewed this professor. Only one review per student", "danger")
     if form.validate_on_submit():
         if db.session.query(Reviews).filter(
-                        Reviews.studentuid == current_user.get_id()).filter(
+                    Reviews.studentuid == current_user.get_id()).filter(
                     Reviews.professoruid == prof.uid).one_or_none() is None:
             review = Reviews(
                 studentuid=int(current_user.get_id()),
@@ -86,16 +95,17 @@ def professor(profid):
                 rating=form.Rating.data)
             db.session.add(review)
             db.session.commit()
+            disabled="True"
             flash("Review submitted successfully", "success")
         else:
+            disabled="True"
             flash("You've already reviewed this professor. Only one review per student", "danger")
+
     if current_user.is_authenticated is False:
         flash("You cannot leave a review unless you're logged in", "danger")
     fields = ["punctual", "deathbypowerpoint", "fairpaperevaluation", "rating"]
     statistics = {k: 0 for k in fields}
     stats = Reviews.query.filter_by(professoruid=prof.uid).all()
-    count = len(stats)
-    print(count)
     if stats is not None:
         for stat in stats:
             # for i in fields:
@@ -105,7 +115,7 @@ def professor(profid):
             statistics["fairpaperevaluation"] += stat.fairpaperevaluation
             statistics["rating"] += stat.rating
 
-    return render_template("profile.html", prof=prof, form=form, statistics=statistics)
+    return render_template("profile.html", prof=prof, form=form, statistics=statistics, disabled=disabled)
 
 
 @bp.after_request

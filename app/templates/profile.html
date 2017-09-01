@@ -26,7 +26,11 @@
                 {{ render_field(form.FairPaperEvaluation) }}
                 {{ render_field(form.Rating, id="hiddenrating", type="hidden") }}
                 <div id="star" class="c-rating"></div>
-                <button type="button" class="btn btn-success btn-md" disabled="{{ disabled }}data-toggle="modal" data-target="#theModal">Submit</button>
+                {% if disabled == "True"%}
+                    <button type="button" class="btn btn-success btn-md" disabled>Submit</button>
+                {% else %}
+                    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#theModal">Submit</button>
+                {% endif %}
             </dl>
 
 
