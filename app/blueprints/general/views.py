@@ -1,8 +1,8 @@
 from urllib.parse import unquote
-from flask import render_template, flash, url_for, redirect, request
+from flask import render_template, flash, url_for, redirect, request, jsonify
 from . import bp
 from app.forms import SignUpForm, LoginForm, ReviewForm
-from app.models import Login, Subjects, Professors, Reviews
+from app.models import Login, Subjects, Professors, Reviews, ProfessorsNames
 from app import db
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -116,6 +116,12 @@ def professor(profid):
             statistics["rating"] += stat.rating
 
     return render_template("profile.html", prof=prof, form=form, statistics=statistics, disabled=disabled)
+
+@bp.route("/data")
+def data():
+    names = ProfessorsNames.query.with_entities(ProfessorsNames.name).all()
+    return jsonify(names)
+
 
 
 @bp.after_request
