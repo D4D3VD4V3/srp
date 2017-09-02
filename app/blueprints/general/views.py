@@ -73,11 +73,12 @@ def subject(subid):
 
 @bp.route("/professor/<profid>", methods=["GET", "POST"])
 def professor(profid):
-    #TODO Check param's veracity
     prof = Professors.query.filter_by(name=unquote(profid)).first()
+    if prof is None:
+        flash("No professor by that name", "danger")
+        return redirect(url_for("bp.home"))
     form = ReviewForm()
     disabled="False"
-    #Doesn't get called after form submission
     if db.session.query(Reviews).filter(
                 Reviews.studentuid == current_user.get_id()).filter(
                 Reviews.professoruid == prof.uid).one_or_none() is not None:
