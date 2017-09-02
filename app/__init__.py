@@ -45,10 +45,10 @@ def create_app():
 
     @app.errorhandler(404)
     def pagenotfound(_):
-        return render_template("404.html")
+        return render_template("404.html"), 404
 
     @app.errorhandler(500)
     def servererror(_):
-        return render_template("500.html")
+        return render_template("500.html"), 500
 
     return app
