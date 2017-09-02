@@ -67,7 +67,11 @@ def semester(sem):
 @bp.route("/subject/<subid>")
 def subject(subid):
     profs = Subjects.query.filter_by(sub=unquote(subid)).all()
-    proflist = set([i.prof for i in profs])
+    if profs:
+        proflist = set([i.prof for i in profs])
+    else:
+        flash("Invalid subject", "danger")
+        return redirect(url_for("bp.home"))
     return render_template("subject.html", profs=proflist)
 
 
@@ -78,11 +82,11 @@ def professor(profid):
         flash("No professor by that name", "danger")
         return redirect(url_for("bp.home"))
     form = ReviewForm()
-    disabled="False"
+    disabled = "False"
     if db.session.query(Reviews).filter(
                 Reviews.studentuid == current_user.get_id()).filter(
                 Reviews.professoruid == prof.uid).one_or_none() is not None:
-        disabled="True"
+        disabled = "True"
         flash("You've already reviewed this professor. Only one review per student", "danger")
     if form.validate_on_submit():
         if db.session.query(Reviews).filter(
@@ -97,10 +101,10 @@ def professor(profid):
                 rating=form.Rating.data)
             db.session.add(review)
             db.session.commit()
-            disabled="True"
+            disabled = "True"
             flash("Review submitted successfully", "success")
         else:
-            disabled="True"
+            disabled = "True"
             flash("You've already reviewed this professor. Only one review per student", "danger")
 
     if current_user.is_authenticated is False:
@@ -119,13 +123,13 @@ def professor(profid):
 
     return render_template("profile.html", prof=prof, form=form, statistics=statistics, disabled=disabled)
 
+
 @bp.route("/data")
 def data():
     names = ProfessorsNames.query.with_entities(ProfessorsNames.name).all()
     flattened_names = list(chain.from_iterable(names))
-    flat_dict = { "data": flattened_names}
+    flat_dict = {"data": flattened_names}
     return jsonify(flat_dict)
-
 
 
 @bp.after_request

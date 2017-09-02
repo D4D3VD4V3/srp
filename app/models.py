@@ -47,6 +47,7 @@ class Professors(db.Model):
     name = db.Column(db.String(50), db.ForeignKey('professorsnames.name'))
     spec = db.Column(db.String(50))
     qual = db.Column(db.String(50))
+# TODO pic?
     pic = db.Column(db.LargeBinary)
     exp = db.Column(db.Integer)
     sub = db.Column(db.String(50), db.ForeignKey('subjectsnames.name'))

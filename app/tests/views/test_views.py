@@ -1,5 +1,6 @@
+from urllib.parse import quote
 from flask import url_for, request
-from app.models import Login
+from app.models import Login, ProfessorsNames, SubjectsNames
 
 
 class TestViews():
@@ -19,18 +20,29 @@ class TestViews():
     def test_signup(self, client):
         response = client.get(url_for("bp.signup"))
         assert response.status_code == 200
+        # response = client.post(
+        # url_for("bp.signup"),
+        # data=dict(
+        # Roll_Number=9999999998,
+        # Email_Address1="itest@test.com",
+        # Email_Address2="itest@test.com",
+        # Password1="password",
+        # Password2="password"),
+        # follow_redirects=True)
+        # assert response.status_code == 302
+        # assert request.path == url_for("bp.login")
 
     def test_login(self, client):
         response = client.get(url_for("bp.login"))
         assert response.status_code == 200
         response = self.login(client=client, email="admin@admin.com", password="password")
         assert response.status_code == 200
-        # assert "successfully" in str(response.data)
         response = self.login(client=client, email="adlkfashdkfl@fake.com", password="password")
         assert response.status_code == 200
         assert "Invalid credentials" in str(response.data)
 
     def test_logout(self, client):
+        self.login(client=client, email="admin@admin.com", password="password")
         response = client.get(url_for("bp.logout"))
         assert response.status_code == 302
 
@@ -41,6 +53,26 @@ class TestViews():
 
         response = client.get(url_for("bp.semester", sem=9))
         assert response.status_code == 200
+
+    def test_professor(self, client):
+        prof = ProfessorsNames.query.first().name
+        response = client.get(url_for("bp.professor", profid=quote(prof)))
+        assert response.status_code == 200
+        # assert request.path != url_for("bp.home")
+
+        prof = "Blah Blah"
+        response = client.get(url_for("bp.professor", profid=quote(prof)))
+        assert response.status_code == 302
+
+    def test_subject(self, client):
+        sub = SubjectsNames.query.first().name
+        response = client.get(url_for("bp.subject", subid=quote(sub)))
+        assert response.status_code == 200
+
+        sub = "Somereallyrandomsubthatexistsonlyintests"
+        response = client.get(url_for("bp.subject", subid=quote(sub)))
+        assert response.status_code == 302
+        # assert "Invalid subject" in str(response.data)
 
     def test_404(self, client):
         response = client.get('/asdfasdfasdflkjlkjlkjadsfasdf')
