@@ -9,7 +9,10 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     {% endblock %}
     <div class="container">
-            <input autocomplete="off" spellcheck="false" type="text" placeholder="Search for professors">
+        <form id="acform">
+            <input autocomplete="off" id="prof" spellcheck="false" type="text" placeholder="Search for professors">
+        </form>
+        <button class="btn btn-default" id="submitbtn">Go</button>
         <div class="jumbotron">
             <h3 align="center">1. Choose your current semester</h3>
         </div>
@@ -28,12 +31,11 @@
         </div>
         <script type="text/javascript" src="{{ url_for("static", filename="js/horsey.min.js") }}"></script>
         <script>
-            var arr;
         function autocomplete(){
         
             $.getJSON("{{ url_for("bp.data") }}", function(data){
 
-                arr = data.data;
+                var arr = data.data;
                 horsey(document.querySelector('input'), {
                     source: [{ list: arr}]
                 });
@@ -43,7 +45,12 @@
 
         $(document).ready(function(){
             autocomplete();
+            $("#submitbtn").click(function(){
+                    //alert($("#prof").val());
+                    window.location =  "../professor/" + encodeURI($("#prof").val());
+                }); 
         });
+            
         </script>
     </div>
 {% endblock %}
