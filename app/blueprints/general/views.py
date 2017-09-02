@@ -1,3 +1,4 @@
+from itertools import chain
 from urllib.parse import unquote
 from flask import render_template, flash, url_for, redirect, request, jsonify
 from . import bp
@@ -120,7 +121,9 @@ def professor(profid):
 @bp.route("/data")
 def data():
     names = ProfessorsNames.query.with_entities(ProfessorsNames.name).all()
-    return jsonify(names)
+    flattened_names = list(chain.from_iterable(names))
+    flat_dict = { "data": flattened_names}
+    return jsonify(flat_dict)
 
 
 

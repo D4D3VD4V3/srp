@@ -28,8 +28,21 @@
         </div>
         <script type="text/javascript" src="{{ url_for("static", filename="js/horsey.min.js") }}"></script>
         <script>
-        horsey(document.querySelector('input'), {
-          source: [{ list: ['banana', 'apple', 'orange'] }]
+            var arr;
+        function autocomplete(){
+        
+            $.getJSON("{{ url_for("bp.data") }}", function(data){
+
+                arr = data.data;
+                horsey(document.querySelector('input'), {
+                    source: [{ list: arr}]
+                });
+            
+            }
+            )};
+
+        $(document).ready(function(){
+            autocomplete();
         });
         </script>
     </div>
