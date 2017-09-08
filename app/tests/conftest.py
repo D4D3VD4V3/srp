@@ -1,5 +1,11 @@
 from app import create_app
 import pytest
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+
+
+Session = sessionmaker()
+engine = create_engine("sqlite:///C:/Users/david/Desktop/srp/srp/app/db/main.db")
 
 
 @pytest.fixture(scope="session")
@@ -12,8 +18,12 @@ def app():
 
 @pytest.fixture(scope="session")
 def db():
-    from app import db
-    db.create_all()
-    yield db
-    db.session.remove()
-    db.drop_all()
+    connection = engine.connect()
+    trans = connection.begin()
+    session = Session(bind=connection)
+
+    yield session
+
+    session.close()
+    trans.rollback()
+    connection.close()
