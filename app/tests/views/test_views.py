@@ -29,7 +29,7 @@ class TestViews():
                 Password1="password",
                 Password2="password"),
             follow_redirects=True)
-        # assert response.status_code == 302
+        assert response.status_code == 200
         assert request.path == url_for("bp.login")
 
         response = client.post(
@@ -41,7 +41,7 @@ class TestViews():
                 Password1="password",
                 Password2="password"),
             follow_redirects=True)
-        # assert response.status_code == 302
+        assert response.status_code == 200
         assert request.path == url_for("bp.signup")
 
     def test_login(self, client):
@@ -70,7 +70,7 @@ class TestViews():
         prof = ProfessorsNames.query.first().name
         response = client.get(url_for("bp.professor", profid=quote(prof)))
         assert response.status_code == 200
-        # assert request.path != url_for("bp.home")
+        assert request.path != url_for("bp.home")
 
         prof = "Blah Blah"
         response = client.get(url_for("bp.professor", profid=quote(prof)))
@@ -82,9 +82,9 @@ class TestViews():
         assert response.status_code == 200
 
         sub = "Somereallyrandomsubthatexistsonlyintests"
-        response = client.get(url_for("bp.subject", subid=quote(sub)))
-        assert response.status_code == 302
-        # assert "Invalid subject" in str(response.data)
+        response = client.get(url_for("bp.subject", subid=quote(sub)), follow_redirects=True)
+        assert response.status_code == 200
+        assert "Invalid subject" in str(response.data)
 
     def test_404(self, client):
         response = client.get('/asdfasdfasdflkjlkjlkjadsfasdf')
