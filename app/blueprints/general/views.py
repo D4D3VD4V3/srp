@@ -1,4 +1,5 @@
 from itertools import chain
+from werkzeug.security import generate_password_hash
 from urllib.parse import unquote
 from flask import render_template, flash, url_for, redirect, request, jsonify
 from . import bp
@@ -37,8 +38,9 @@ def login():
     form = LoginForm()
     nexturl = request.args.get('next')
     if form.validate_on_submit():
-        user = Login.query.filter_by(email=form.Email_Address.data).first()
-        if user is not None and user.verify_password(form.Password.data):
+        user = Login.query.filter_by(email=generate_password_hash(form.Email_Address.data)).first()
+        print(generate_password_hash(form.Email_Address.data))
+        if user is not None and user.check_password(form.Password.data):
             login_user(user, remember=form.RememberMe.data)
             flash("Login successful", "success")
             if nexturl:
@@ -109,7 +111,7 @@ def professor(profid):
 
     if current_user.is_authenticated is False:
         flash("You cannot leave a review unless you're logged in", "danger")
-    fields = ["punctual", "deathbypowerpoint", "fairpaperevaluation", "rating"]
+    fields = ["punctual", "reliesonppt", "fairpaperevaluation", "rating"]
     statistics = {k: 0 for k in fields}
     stats = Reviews.query.filter_by(professoruid=prof.uid).all()
     if stats is not None:
@@ -117,9 +119,10 @@ def professor(profid):
             # for i in fields:
             # statistics[i] += stat[i]
             statistics["punctual"] += stat.punctual
-            statistics["deathbypowerpoint"] += stat.deathbypowerpoint
+            statistics["reliesonppt"] += stat.deathbypowerpoint
             statistics["fairpaperevaluation"] += stat.fairpaperevaluation
             statistics["rating"] += stat.rating
+            statistics["rating"] /= len(stats)
 
     return render_template("profile.html", prof=prof, form=form, statistics=statistics, disabled=disabled)
 

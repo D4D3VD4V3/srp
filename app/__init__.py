@@ -4,6 +4,7 @@ from flask_nav import Nav
 from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
+from flask_restless import APIManager
 
 SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
 nav = Nav()
@@ -18,6 +19,7 @@ def bar():
 
 db = SQLAlchemy()
 login = LoginManager()
+restless = APIManager(flask_sqlalchemy_db = db)
 
 
 def create_app():
@@ -37,6 +39,13 @@ def create_app():
     @login.user_loader
     def load_user(uid):
         return Login.query.get(int(uid))
+
+    restless.init_app(app)
+
+    from .models import ProfessorsNames, Professors
+    with app.app_context():
+        restless.create_api(ProfessorsNames, app=app, methods=["GET", "POST"])
+        restless.create_api(Professors, app=app, methods=["GET", "POST"])
 
     from app.blueprints.general import bp
     from app.blueprints.admin import admin_bp

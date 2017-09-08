@@ -6,24 +6,43 @@ from . import db
 class Login(db.Model, UserMixin):
     __tablename__ = 'login'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    rollno = db.Column(db.Integer, unique=True)
-    email = db.Column(db.String(50), unique=True)
+    _rollno = db.Column(db.String, unique=True)
+    _email = db.Column(db.String, unique=True)
     _passwordhash = db.Column(db.String(256))
     isadmin = db.Column(db.Boolean)
+
+    def check_rollno(self, rollno):
+        return check_password_hash(self._rollno, rollno)
+
+    def check_email(self, email):
+        return check_password_hash(self._email, email)
 
     def check_password(self, passwd):
         return check_password_hash(self._passwordhash, passwd)
 
     @property
+    def rollno(self):
+        raise AttributeError("Nice try!")
+
+    @property
+    def email(self):
+        raise AttributeError("Nice try!")
+
+    @property
     def password(self):
         raise AttributeError("Nice try!")
+
+    @rollno.setter
+    def rollno(self, rollno):
+        self._rollno = generate_password_hash(rollno)
+
+    @email.setter
+    def email(self, email):
+        self._email = generate_password_hash(email)
 
     @password.setter
     def password(self, password):
         self._passwordhash = generate_password_hash(password)
-
-    def verify_password(self, password):
-        return check_password_hash(self._passwordhash, password)
 
     @property
     def is_authenticated(self):
