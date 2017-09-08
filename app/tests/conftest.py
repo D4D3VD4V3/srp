@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 
 
 Session = sessionmaker()
-engine = create_engine("sqlite:///C:/Users/david/Desktop/srp/srp/app/db/main.db")
+engine = create_engine("sqlite:///../db/main.db")
 
 
 @pytest.fixture(scope="session")
