@@ -38,8 +38,14 @@ def login():
     form = LoginForm()
     nexturl = request.args.get('next')
     if form.validate_on_submit():
-        user = Login.query.filter_by(email=generate_password_hash(form.Email_Address.data)).first()
-        print(generate_password_hash(form.Email_Address.data))
+        # user = Login.query.filter_by(email=generate_password_hash(form.Email_Address.data)).first()
+        users = Login.query.all()
+        user = None
+        for i in users:
+            if i.check_email(form.Email_Address.data):
+                user = i
+                break
+
         if user is not None and user.check_password(form.Password.data):
             login_user(user, remember=form.RememberMe.data)
             flash("Login successful", "success")

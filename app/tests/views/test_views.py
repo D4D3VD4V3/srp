@@ -49,6 +49,7 @@ class TestViews():
         assert response.status_code == 200
         response = self.login(client=client, email="admin@admin.com", password="password")
         assert response.status_code == 200
+        assert "Login successful" in str(response.data)
         response = self.login(client=client, email="adlkfashdkfl@fake.com", password="password")
         assert response.status_code == 200
         assert "Invalid credentials" in str(response.data)
