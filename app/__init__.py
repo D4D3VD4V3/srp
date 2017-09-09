@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
 from flask_nav import Nav
@@ -5,11 +6,11 @@ from flask_nav.elements import Navbar, View
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 
-SECRET_KEY = 'ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9'
+SECRET_KEY = os.getenv("SECRET_KEY", "ffasdhfas;ofmjasdfhzizvmhdlahfm;oginlamfwldsafhks;foajflasjdfap9")
 nav = Nav()
 
 
-@nav.navigation(id='bar')
+@nav.navigation(id="bar")
 def bar():
     if current_user.is_authenticated:
         return Navbar(View("Home", "bp.home"), View("Log out", "bp.logout"))

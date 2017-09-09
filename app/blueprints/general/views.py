@@ -38,7 +38,6 @@ def login():
     form = LoginForm()
     nexturl = request.args.get('next')
     if form.validate_on_submit():
-        # user = Login.query.filter_by(email=generate_password_hash(form.Email_Address.data)).first()
         users = Login.query.all()
         user = None
         for i in users:
@@ -122,8 +121,6 @@ def professor(profid):
     stats = Reviews.query.filter_by(professoruid=prof.uid).all()
     if stats is not None:
         for stat in stats:
-            # for i in fields:
-            # statistics[i] += stat[i]
             statistics["punctual"] += stat.punctual
             statistics["reliesonppt"] += stat.deathbypowerpoint
             statistics["fairpaperevaluation"] += stat.fairpaperevaluation
