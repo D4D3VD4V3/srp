@@ -1,0 +1,23 @@
+{
+  "name": "srp",
+  "version": "1.0.0",
+  "description": "srp",
+  "main": "app/",
+  "scripts": {
+    "test": "pytest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D4D3VD4V3/srp.git"
+  },
+  "author": "D4D3VD4V3",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/D4D3VD4V3/srp/issues"
+  },
+  "homepage": "https://github.com/D4D3VD4V3/srp#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-shell": "^0.6.3"
+  }
+}
