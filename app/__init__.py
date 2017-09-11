@@ -26,6 +26,9 @@ def create_app():
     app.secret_key = SECRET_KEY
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/main.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    #TODO:Check for debug config
+    app.jinja_env.auto_reload = True
+    app.config["TEMPLATES_AUTO_RELOAD"] = True
     Bootstrap(app)
     nav.init_app(app)
     db.init_app(app)
