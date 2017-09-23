@@ -1,0 +1,9 @@
+*.pyc
+*.db
+tags
+.ropeproject/
+.idea/
+node_modules/
+htmlcov/
+.coverage
+.cache/
