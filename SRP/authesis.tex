@@ -1,0 +1,348 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Anna University sample latex thesis format for UG thesis
+%--------------------------------
+%%This is the main file that includes the front matter and other chapter links. 
+%%Chapters are placed within the folder named 1, 2,...  
+%%To compile, run the command `pdflatex authesis.tex' in the terminal. 
+%%Some packages may not be needed. Comment the ones, that are not needed. 
+%%Images can be saved in the format of *.png. 
+%%------------------------------------------------------
+%% Authors:
+%%Originally used by Dr. Mary Anita Rajam and then modified by Dr. Bama Srinivasan according to the latest Anna University regulations. %%Please report changes to bama@annauniv.edu, chorse@gmail.com %%
+%%Acknowledgement: Thanks to Dr.Ranjani Parthasarathi, who relentlessly and patiently guided Bama Srinivasan.
+%---------------------------------------------------------
+%% Modification added:
+%%new file apalikem is added, which gives a neat reference list with 1, 2...
+%%aureportm has appendix starting with Arabic numbers
+%% Disclaimer: Check with the latest Anna University regulations before working with this format.
+%% Changes as on July 2016 
+%% 1. Changed the appendix back to alpha mode in aureport.cls
+%% 2. Table of contents - reduced the top margin and spacing
+%% 3. Added the counter depth for sections to 4 in aureport.cls
+%% 4. Deleted chapter number, title and page number in TOC
+%% 5. Reduced the top space in chapter titles from 6.5 cms to 5.5 cms in aureport.cls
+%% 6. Changes in references use the package natbib and style unsrt. Include a .bib file for the bibliography
+%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\documentclass[13 pt,a4paper]{aureportm}
+\usepackage{mathptm}\usepackage{etex}
+\reserveinserts{28}
+\renewcommand{\normalsize}{\fontsize{13 pt}{14.6 pt}\selectfont}
+%\usepackage{aunatbib}
+%\usepackage{apalikem}
+\usepackage{natbib}
+\usepackage{bussproofs} % for deduction rules 
+\usepackage{auphd}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[none]{hyphenat}
+\usepackage[chapter]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{latexsym}
+\usepackage{verbatim}
+\usepackage{ifthen}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{epsfig}
+\usepackage{pslatex}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[subfigure]{tocloft}
+\usepackage{subfigure}
+\usepackage{longtable}
+\usepackage{enumerate}
+\usepackage{lscape}
+
+\usepackage[format=hang,labelfont=bf,textfont=bf]{caption}
+\PassOptionsToPackage{linktocpage}{hyperref}
+\tocloftpagestyle{myheadings}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\let\PBS=\PreserveBackslash
+
+\usepackage{colortbl}
+\usepackage{newlfont}
+
+
+\newboolean{psoutput}
+\setboolean{psoutput}{true}
+\usepackage{pst-all}
+\newcommand{\defname}[1]{\emph{#1}.}
+
+\newtheorem{fact}{Fact}[chapter]
+
+\floatstyle{ruled}
+\newfloat{algorithm}{htp}{loa}
+\floatname{algorithm}{Algorithm}
+
+
+\titleformat{\section}[hang]{\bfseries}{\makebox[20mm][l]{\thesection}}{0pt}{}{}
+\titleformat{\subsection}[hang]{\bfseries}{\makebox[20mm][l]{\thesubsection}}{0pt}{}{}
+
+
+
+ \newcounter {definition}[chapter]
+\renewcommand \thedefinition {\arabic{chapter}.\arabic{definition}}
+\newenvironment{definition}
+{ \refstepcounter{definition}
+   {\noindent \bf Definition \arabic{chapter}.\arabic{definition}.}}
+ {}
+ \def\enddefinition{$\Box$}
+
+ \newcounter {example}[chapter]
+ \renewcommand \theexample
+ {\arabic{chapter}.\arabic{example}}
+ \newenvironment{example}
+ { \refstepcounter{example}
+   {\noindent \bf Example \arabic{chapter}.\arabic{example}.}}
+ {}
+ \def\endexample{$\Box$}
+
+ \newcounter {proposition}[chapter]
+ \renewcommand \theproposition {\arabic{chapter}.\arabic{proposition}}
+ \newenvironment{proposition}
+ {\refstepcounter{proposition}
+   {\noindent \bf Proposition \arabic{chapter}.\arabic{proposition}. }}
+ {}
+ \def\endproposition{$\Box$}
+
+\pagenumbering{roman}
+\setcounter{page}{3}
+%\setcounter{secnumdepth}{3}
+\renewcommand{\baselinestretch}{1.5}
+\newcommand{\row}{i}
+\newcommand {\combined} {{C}}
+\newcommand {\mtis} {}
+
+\newboolean{showalter}
+\setboolean{showalter}{true}
+\newcommand{\alter}[1]{\ifthenelse{\boolean{showalter}}{ \{ #1 \} }{}}
+\providecommand{\tabularnewline}{\\}
+\newcommand{\bigsize}{\fontsize{15pt}{20pt}\selectfont}
+
+\author{Author of the thesis}
+
+
+\renewcommand{\cfttoctitlefont}{\bfseries\Large}
+\renewcommand{\cftlottitlefont}{\bfseries\Large}
+\renewcommand{\cftloftitlefont}{\bfseries\Large}
+
+
+%\cftsetindents{chapter}{0mm}{10mm}
+%\cftsetindents{section}{10mm}{10mm}
+%\cftsetindents{subsection}{20mm}{10mm}
+%\setlength{\cftbeforechapskip}{1.2\baselineskip}
+%\setlength{\cftbeforesecskip}{.8\baselineskip}
+%\setlength{\cftbeforesubsecskip}{.8\baselineskip}
+%\setlength{\cftbeforefigskip}{.8\baselineskip}
+%\setlength{\cftbeforetabskip}{.8\baselineskip}
+%
+\makeatletter
+\renewcommand{\@dotsep}{10}
+\makeatother
+\renewcommand{\cftdot}{ }
+\cftsetrmarg{1.2in} % changed by bama - earlier it was 1.5 inch. right margin is decreased to 1 inch.
+
+\titleformat{\section}[hang]{\bfseries}{\makebox[20mm][l]{\thesection}}{0pt}{}{}
+\titleformat{\subsection}[hang]{\bfseries}{{\thesubsection}}{0pt}{}{}
+\titleformat{\subsubsection}[hang]{\normalsize\bfseries}{\makebox[20mm][l]{\thesubsubsection}}{0pt}{}{}
+\titleformat{\paragraph}[hang]{\normalsize\bfseries}{\makebox[20mm][l]{\theparagraph}}{0pt}{}{}
+\titleformat{\subparagraph}[hang]{\normalsize\bfseries}{\makebox[20mm][l]{\thesubparagraph}}{0pt}{}{}
+
+\begin{document}
+
+\pagenumbering{roman}
+
+
+\thispagestyle{empty}
+\begin{center}
+  \LARGE
+  \textbf{\uppercase{STAFF RATING SYSTEM}} \\
+  \vspace{0.6\baselineskip}
+  \bigsize{\textbf{A PROJECT REPORT}}\\
+ \vspace{0.4\baselineskip}
+
+  \normalsize{\textit{\textbf{Submitted by}}}\\
+  \vspace{0.5\baselineskip}
+  {
+  \Large \textbf{DAVID SUNDARAJ 2015115070}}\\
+  %\normalsize{\textbf{(Roll number)}}\\
+  \Large{\textbf{R.MOHAMED BILAL 2015115088}}\\
+  \Large{\textbf{R.BENNY KIWIN CARDOZA 2015115069}} \\
+   \vspace{0.6\baselineskip}
+  %\normalsize{\textit{A report for the phase-I of the project}}\\
+  \vspace{-0.1\baselineskip}
+  \normalsize{\textit{submitted to the Faculty of}} \\
+  \vspace{0.5\baselineskip}
+  \normalsize{\textbf{INFORMATION AND SCIENCE TECHNOLOGY}} \\  
+  \vspace{1\baselineskip}
+  \normalsize{\textit{in partial fulfillment  for the award of the degree}}\\
+  \normalsize{\textit{\textbf{of}}}\\
+\vspace{.2\baselineskip}
+  \bigsize{{\textbf{BACHELOR OF TECHNOLOGY}}}\\
+  \normalsize{\textit{\textbf{in}}}\\
+  \bigsize{{\textbf{INFORMATION TECHNOLOGY}}}\\
+\end{center}
+  \begin{center}
+   %\includegraphics[width=26mm,height=25mm]{auemblem.pdf}   \\
+   \includegraphics[scale=0.7]{auemblem.pdf} \\
+  \normalsize{ \textbf{DEPARTMENT OF INFORMATION SCIENCE AND TECHNOLOGY }}\\
+  \normalsize{\textbf{COLLEGE OF ENGINEERING, GUINDY}}\\
+  \normalsize{\textbf{ANNA UNIVERSITY}}\\
+  \normalsize{\textbf{CHENNAI  600 025}}\\
+  \vspace{0.5\baselineskip}
+  \normalsize{\textbf{OCTOBER 2017 }}
+ \end{center}
+\pagebreak
+
+\chapter*{ANNA UNIVERSITY\\
+CHENNAI - 600 025\\
+%\vspace{\baselineskip}
+BONA FIDE CERTIFICATE}
+\newlength{\aulength}
+\settowidth{\aulength}{Anna University
+  Chennai}
+\newlength{\datewidth}
+\settowidth{\datewidth}{Chennai 600 025}
+
+\begin{spacing}{1.5}
+  \begin{sloppypar}
+  \fontsize{13}{14.5}\selectfont Certified that this project report titled TITLE OF THE PROJECT TITLE OF THE PROJECT TITLE OF THE PROJECT TITLE OF THE PROJECT TITLE OF THE PROJECT is the bona fide work of NAME OF THE CANDIDATE(S) who carried out project work under my supervision. Certified further that to the best of my knowledge and belief, the work reported herein does not form part of any other thesis or dissertation on the basis of which a degree or an award was conferred on an earlier occasion on this or any other candidate.
+  \end{sloppypar}
+\end{spacing}
+\vspace{-0.3 cm}
+\begin{flushleft}
+ \parbox[t]{\datewidth}{\small{\textbf{PLACE: }}\\
+ \small{\textbf{DATE: }}}
+ \hfill
+ \parbox[t]{6 cm}{\small{\textbf{$<$NAME OF GUIDE$>$}} \\
+ \small{\textbf{$<$DESIGNATION$>$}}\\
+ \small{\textbf{PROJECT GUIDE}}\\
+ \small{\textbf{DEPARTMENT OF IST, CEG}}\\
+ \small{\textbf{ANNA UNIVERSITY}}   \\
+ \small{\textbf{CHENNAI  600025}}
+ }
+\end{flushleft}
+%\vspace{0.5 cm}
+\begin{center}
+ \small{\textbf{COUNTERSIGNED}}\\ 
+  \vspace{1.5 cm}
+  \textbf{\small{Dr. SASWATI MUKHERJEE}}\\ 
+  \small{\textbf{HEAD OF THE DEPARTMENT}}\\
+ \small{\textbf{DEPARTMENT OF INFORMATION SCIENCE AND TECHNOLOGY}}\\
+ \small{\textbf{COLLEGE OF ENGINEERING, GUINDY}}\\
+ \small{\textbf{ANNA UNIVERSITY}}   \\
+ \small{\textbf{CHENNAI  600025}}
+ 
+\end{center}
+
+
+
+%\addtocontents{toc}{\protect\flushleft \protect\bfseries
+%CHAPTER NO. \hfill TITLE \hfill PAGE NO.\endgraf}
+
+%\addtocontents{toc}{\protect\raggedleft Page\\}
+
+ %\addtocontents{lof}{\protect\flushleft
+%\protect\bfseries FIGURE NO. \hfill
+% TITLE \hfill  PAGE NO.\endgraf}%
+%\addtocontents{lot}{\protect\flushleft \protect\bfseries TABLE NO. \hfill
+%  TITLE \hfill  PAGE NO.\endgraf}%
+
+
+\include{Abstract/abstract}
+
+
+\setlength\cftparskip{0pt}
+\setlength{\cftbeforetoctitleskip}{-3em} %Decrease the top margin of toc title
+%\setlength{\cftaftertoctitleskip}{0 em} 
+\setlength{\cftbeforelottitleskip}{-3em} % Decrease the top margin of lot
+\setlength{\cftbeforeloftitleskip}{-3em} % Decrease the top margin of lof
+\cftsetindents{chapter}{0 mm}{10 mm}
+\cftsetindents{section}{10 mm}{10 mm}
+\cftsetindents{subsection}{20 mm}{10 mm}
+\cftsetindents{subsubsection}{30 mm}{15 mm}
+\cftsetindents{paragraph}{40 mm}{20 mm}
+\cftsetindents{subparagraph}{50 mm} {20  mm}
+\cftsetindents{table}{10 mm}{10 mm}
+\cftsetindents{figure}{10 mm}{10 mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Changes made as on June 2016
+%%%%%%%%ADD TOC with one half spacing%%%%%%%%%%%
+\begin{onehalfspacing} 
+\tableofcontents
+
+\pagebreak
+
+\addcontentsline{toc}{section}{\bfseries LIST OF TABLES}
+\listoftables
+
+ \clearpage \addcontentsline{toc}{section}{\bfseries
+LIST OF FIGURES} \listoffigures
+%\clearpage
+\end{onehalfspacing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% These are old as of April 2016 -
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\cftsetindents{chapter}{0.2in}{1.5in}
+%\cftsetindents{section}{1.7in}{0.3in}
+%\cftsetindents{subsection}{1.8in}{0.4in}
+%\cftsetindents{table}{0.2in}{1.5in}
+%\cftsetindents{figure}{0.2in}{1.5in}
+%\tableofcontents
+
+
+
+%\pagebreak
+
+%\addcontentsline{toc}{section}{\bfseries LIST OF TABLES}
+%\listoftables
+% \clearpage \addcontentsline{toc}{section}{\bfseries
+%LIST OF FIGURES} \listoffigures
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\clearpage
+
+%\newpage
+\pagenumbering{arabic}
+
+\ausection
+\include{1/Chapter1}
+\include{2/Chapter2}
+\include{3/Chapter3}
+\include{4/Chapter4}
+\include{5/Chapter5}
+%\include{6/Chapter6}
+\include{Conclusion/conclusion}
+\cleardoublepage
+\phantomsection 
+\include{Appendix/appendix}
+
+
+%\bibliographystyle{auapalike}
+\bibliographystyle{unsrt}
+\nocite{*}%This gives a list of all references that includes without citation. Remove this, once the reference is cited
+\phantomsection
+\addcontentsline{toc}{chapter}{REFERENCES}
+\begin{spacing}{1}
+\bibliography{publication}
+\end{spacing}
+
+\newpage
+\clearpage
+
+
+
+
+\addtocontents{toc}{\protect\newpage}
+\addtocontents{lot}{\protect\newpage}
+\addtocontents{lof}{\protect\newpage}
+
+\end{document}

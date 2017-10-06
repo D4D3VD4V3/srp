@@ -1,0 +1,64 @@
+% Chapter 1
+
+\chapter{\uppercase{Introduction}} % Main chapter title
+\label{intro} % For referencing
+This chapter is about the introduction of your work. 
+\section{\uppercase{Format of the thesis}}
+A few guidelines for writing the thesis are given below. These are taken from Ph.d regulations of Anna University \cite{regulations}. 
+\subsection{Table of Contents}
+The Table of contents should list all captions following it as well as any caption which precedes it. The title page, Certificate and Acknowledgment will not find a place among the items listed in the Table of Contents but the page numbers of which are in lower case Roman letters. One and a half line spacing should be adopted. 
+\subsection{List of Tables and Figures}
+The list should use exactly the same captions as they appear above the Tables and Figures in the text. One and a half line spacing should be adopted.
+\newpage
+\subsection{List of Symbols and Abbreviations}
+One and a half line spacing should be adopted for typing the matter under this head. Standard symbols, abbreviations, etc.
+should be used.
+\subsection{Chapters}
+The chapters may be broadly divided into 3 parts (i) Introductory chapter, (ii) Chapters developing the main theme of the Thesis and (iii) Results, Discussion and Conclusion. The main text shall be divided into several chapters and each chapter may be further divided into several divisions and sub-divisions. 
+\begin{itemize}
+ \item Each chapter should be given an appropriate title.
+ \item Tables and Figures in a chapter should be placed in the immediate vicinity of the reference where they are cited.
+ \item Footnotes should be used sparingly. They should be typed single space and
+placed directly underneath in the very same page which refers to the material
+they annotate.
+\end{itemize}
+\subsection{Appendices}
+Appendices are provided to give supplementary information, which if included in the main text may serve as a distraction and cloud the central theme under discussion.
+\begin{itemize}
+ \item Appendices should be named alphabetically starting from Appendix A, Appendix B, etc.
+\item  Appendices, Tables and references appearing in appendices should be numbered and referred to at appropriate places just as in the case of chapters.
+\item Appendices shall carry the title of the work reported and the same title shall be included in the Table of Contents page.
+\end{itemize}
+\subsection{References}
+Any works of other researchers, if used either directly or indirectly, the origin of the material thus referred to at appropriate places in the thesis should be indicated. Use of bibtex is recommended.
+\subsection{Citation}
+A few examples for citing articles, books and websites are given in Chapter \ref{ch:survey}. 
+\subsection{Tables and Figures}
+A Table or Figure including caption should be accommodated within the prescribed margin limits and appear on the page following the page where their first reference is made.
+\begin{itemize}
+ \item Tables and Figures on half page or less in length may appear on the same page along with the text. However, they should be separated from the text both above and below by triple spacing.
+\item Tables and Figures on half page or less in length may appear on the same page along with the text. However, they should be separated from the text both above and below by triple spacing.
+\item All Tables and Figures should be prepared on the same paper or material used for the preparation of the rest of the Thesis.
+\item Two or more small Tables or Figures may be grouped if necessary in a single page.
+\end{itemize}
+\section{\uppercase{Typing Instructions}}
+Some guidelines for typing are provided below.
+\subsection{General}
+One and a half line spacing should be used for typing the general text. The general text shall be typed in Font Style Times New Roman and Font Size 13. 
+\subsection{Chapter}
+The word CHAPTER without punctuation should be centered 50 mm down from the top of the page. Two spaces below, the title of the chapter should be typed centrally in capital letters. The text should commence 4 spaces below this title, the first letter of the text starting 20 mm inside from the left hand margin. The division and sub-division captions along with their numberings should be left justified. The typed material directly below division or sub-division heading should commence 2 spaces below it and should be offset 20 mm from the left hand margin. Within a division or sub-division paragraphs are permitted. Even paragraph should commence 3 spaces below the last line of the preceding paragraph, the first letter in the paragraph being offset from the left hand margin by 20 mm.
+\section{\uppercase{NUMBERING INSTRUCTIONS}}
+\subsection{Page Numbering}
+All page numbers (whether it be in Roman or Arabic numbers) should be typed without punctuation on the upper right hand corner 20 mm from the top with the last digit in line with the right hand margin. The preliminary pages of the Thesis (such as Title page, Acknowledgement, Table of Contents, etc.) should be numbered in lower case Roman numerals. The title page will be numbered as (i) but this should not be typed. The page immediately following the title page shall be numbered as (ii) and it should appear at the top right hand corner as already specified. Pages of main text, starting with Chapter 1 should be consecutively numbered using Arabic numerals.
+\subsection{Numbering of Chapters, Divisions and Subdivisions}
+The numbering of chapters, divisions and sub-divisions should be done using Arabic numerals only and further decimal notation should be used for numbering the divisions and sub-divisions within a chapter. For example sub-division 4 under division 3 belonging to chapter 2 should be numbered as 2.3.4. The caption for the sub-division should immediately follow the number assigned to it. Refer below to the subsection and subsubsections. Every chapter beginning with the first chapter should be serially numbered using Arabic numerals. 
+\subsubsection{A subdivision of the subsection}
+Use \texttt{subsubsubsection} in Latex to indicate a subdivision. The numbering should automatically appear in the Table of Contents. 
+\subsection{Numbering of Tables and Figures}
+Tables and Figures appearing anywhere in the Thesis should bear appropriate numbers. The rule for assigning such numbers is illustrated by an example. Thus, if a Figure in Chapter 3, happens to be the fourth then assign 3.4 to that Figure. Identical rules apply for Tables except that the word Figure is replaced by the word Table. If Figures (or Tables) appear in appendices then Figure 3 in Appendix SEction 2 will be designated as Figure A 2.3. If a table to be continued into the next page this may be done, but no line should be drawn underneath an unfinished Table. The top line of the Table continued into the next page should, for example read Table 2.1
+(continued) placed centrally and underlined.
+
+\subsection{Numbering of Equations}
+Equations appearing in each Chapter or Appendix should be numbered serially, the numbering should commence afresh for each Chapter or Appendix.
+
+

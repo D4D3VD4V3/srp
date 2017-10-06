@@ -1,0 +1,102 @@
+
+
+% modifications to report.cls for anna univ phd thesis
+
+% the top level .tex file should begin with
+% \documentclass[12pt,a4paper]{report}
+
+% for citations and reference style, use 
+% \bibliographystyle{apalike}
+
+                                             
+%\usepackage{auapalike}
+
+
+\usepackage{times}
+%\usepackage{palatino}
+\usepackage{courier}
+% \usepackage{symbol}
+% \usepackage{lucida}
+
+
+%--------------------------------------------
+
+\def\chaptername{CHAPTER}
+
+\def\contentsname{\centerline{TABLE OF CONTENTS}}
+%\def\listfigurename{\centerline{LIST OF FIGURES}}
+%\def\listtablename{\centerline{LIST OF TABLES}}
+\def\bibname{\centerline{REFERENCES}}
+\def\tablename{Table}
+
+
+%---------------------------------------------
+
+\pagestyle{myheadings}
+
+
+
+%---------------------------------------------
+% text on the page, margins etc.
+
+%\evensidemargin=0in
+%\footheight=0.2in
+%\footskip=0.5in    % default is 0.5 in and page numbers come out too low
+\headsep=1.0cm   	% Distance between page nums and text
+%\itemindent=0.8in
+%%\marginparsep=10pt
+%%\marginparwidth=40pt
+\oddsidemargin=1.5cm		% was 0.495 - annette asked for a little more
+%\parindent=0.4in
+\textheight=23.0cm
+\textwidth=14.5cm
+%\topmargin=-0.9cm		% Put the pagenumber in the correct place
+\topmargin=-0.6cm		% Put the pagenumber in the correct
+                                % place
+\setlength{\hoffset}{-.2cm}
+%---------------------------------------------
+% font sizes, space between lines etc. 
+
+
+% \linespread{1.2}
+%% \linespread{1.6}
+
+% Use 1.65 times the normal baseline-to-baseline skip
+% for the appearance of double spacing
+\renewcommand{\baselinestretch}{1.65}
+
+
+\setlength\parskip{20\p@ \@plus \p@}
+\setlength\parindent{20mm}
+
+% indents first line of first paragraph also
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
+
+
+\endinput
+
+%\renewcommand\paragraph{}
+%\renewcommand\subparagraph{}
+
+%---------------------------------------------
+% hyphenation, page breaks etc.
+
+%% Reduce the overall amount of hyphenation
+%% These aren't usable with TeX versions lower than 3.0.
+%% If you are using a lower version of TeX, delete the next 3 lines.
+%\emergencystretch=0.2in
+%%\lefthyphenmin=3
+%%\righthyphenmin=4
+%% Increased because of all the fun on the TOC...
+%\lefthyphenmin=5
+%\righthyphenmin=6
+
+%% Disallow page breaks at hyphens, except where the only alternative
+%% is a widow or orphan (club)
+%\brokenpenalty=9900
+
+%% Disallow all widows and orphans (clubs)
+%\widowpenalty=10000
+%\clubpenalty=10000
+

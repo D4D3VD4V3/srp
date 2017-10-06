@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/dev/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: authesis.aux
+A level-1 auxiliary file: Abstract/abstract.aux
+A level-1 auxiliary file: acknowl.aux
+A level-1 auxiliary file: Acronyms/acronyms.aux
+A level-1 auxiliary file: 1/Chapter1.aux
+A level-1 auxiliary file: 2/Chapter2.aux
+A level-1 auxiliary file: 3/Chapter3.aux
+A level-1 auxiliary file: 4/Chapter4.aux
+A level-1 auxiliary file: 5/Chapter5.aux
+A level-1 auxiliary file: 6/Chapter6.aux
+A level-1 auxiliary file: Conclusion/conclusion.aux
+A level-1 auxiliary file: Appendix/appendix.aux
+The style file: unsrt.bst
+Database file #1: publication.bib
+You've used 12 entries,
+            1791 wiz_defined-function locations,
+            530 strings with 5365 characters,
+and the built_in function-call counts, 2447 in all, are:
+= -- 223
+> -- 71
+< -- 4
++ -- 30
+- -- 18
+* -- 118
+:= -- 369
+add.period$ -- 35
+call.type$ -- 12
+change.case$ -- 9
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 129
+empty$ -- 270
+format.name$ -- 18
+if$ -- 576
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 11
+newline$ -- 62
+num.names$ -- 12
+pop$ -- 49
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 65
+stack$ -- 0
+substring$ -- 135
+swap$ -- 36
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 21
+width$ -- 14
+write$ -- 131

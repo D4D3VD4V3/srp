@@ -1,0 +1,36 @@
+% Chapter 2
+
+\chapter{\uppercase{Literature Survey/Related Work}} % Main chapter title
+\label{ch:survey} % For referencing
+
+This chapter should provide the details about the related work. Atleast 20 articles should be referred and cited. The explanation should be provided within sections and subsections. 
+
+Include the limitations of the existing work and briefly explain how your idea is advantageous over the existing ones in this chapter.
+\section{\uppercase{Method of Citation}}
+Following are a few methods of citation.
+\subsection{Citation of Websites}
+The websites should be cited as shown in this reference \cite{regulations}.
+
+An improved algorithm has been adopted in the literature \cite{factors}. 
+
+\subsection{Citation of Journals}
+ Method for citing journals can be seen in references \cite{conley} \cite{waldron}.
+
+\subsection{Citation of Proceedings}
+The problem of mechanical manipulators has been studied extensively in the theory of mechanics and machines \cite{holt} and \cite{waldron}.
+
+\subsection{Citation of Articles/ Newspapers/ Media}
+
+\subsection{Citation of Books}
+
+\section{\uppercase{Section 2}}
+
+\subsection{Subsection 1}
+
+\subsection{Subsection 2}
+
+\section{\uppercase{Section 3}}
+
+\subsection{Subsection 1}
+
+\subsection{Subsection 2}
