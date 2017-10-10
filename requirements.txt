@@ -13,6 +13,7 @@ Jinja2==2.9.6
 MarkupSafe==1.0
 mimerender==0.6.0
 mimesis==0.0.5
+psycopg2==2.7.3.1
 py==1.4.34
 pytest==3.2.1
 pytest-flask==0.10.0
