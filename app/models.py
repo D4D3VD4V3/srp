@@ -79,7 +79,6 @@ class ProfessorsNames(db.Model):
 
 
 class Subjects(db.Model):
-    __tablename__ = 'subjects'
     uid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     sem = db.Column(db.Integer)
     sub = db.Column(db.String(50))
