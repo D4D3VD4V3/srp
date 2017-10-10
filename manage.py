@@ -41,7 +41,7 @@ def createdb():
                     qual=choice(["Master's", "PhD"]) + " in " + choice(subs),
                     exp=randint(2, 20)))
 
-        db.session.add(Login(rollno="00000000", email="admin@admin.com", password="password", isadmin=1))
+        db.session.add(Login(rollno="00000000", email="admin@admin.com", password="password", isadmin=True))
         db.session.commit()
 
 
