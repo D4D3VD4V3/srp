@@ -93,20 +93,18 @@
               },
               options:
               {
-                  layout: {
-                    padding: {
-                        left: 50,
-                        right: 50}},
+                  responsive: true,
+                  maintainAspectRatio: true,
                   legend: {
                     display: false,
-                    position: 'top'
                   },
                   scales: {
                     xAxes: [{
+                      barPercentage: 0.4,
                       scaleLabel: {
                         display: true,
                         labelString: "Rating parameters",
-                        fontColor: "red"
+                        fontColor: "red",
                       },
                     ticks: {
                         min: 0,
@@ -117,7 +115,7 @@
                       scaleLabel: {
                         display: true,
                         labelString: "Score",
-                        fontColor: "green"
+                        fontColor: "green",
                       },
 
                     ticks: {
