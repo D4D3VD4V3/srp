@@ -119,13 +119,15 @@ def professor(profid):
     fields = ["punctual", "reliesonppt", "fairpaperevaluation", "rating"]
     statistics = {k: 0 for k in fields}
     stats = Reviews.query.filter_by(professoruid=prof.uid).all()
-    if stats is not None:
+    if len(stats):
         for stat in stats:
-            statistics["punctual"] += stat.punctual
-            statistics["reliesonppt"] += stat.deathbypowerpoint
-            statistics["fairpaperevaluation"] += stat.fairpaperevaluation
+            statistics["punctual"] += stat.punctual * 5
+            statistics["reliesonppt"] += stat.deathbypowerpoint * 5
+            statistics["fairpaperevaluation"] += stat.fairpaperevaluation * 5
             statistics["rating"] += stat.rating
-            statistics["rating"] /= len(stats)
+        for field in fields:
+            statistics[field] /= len(stats)
+            statistics[field] *= 20
 
     return render_template("profile.html", prof=prof, form=form, statistics=statistics, disabled=disabled)
 
