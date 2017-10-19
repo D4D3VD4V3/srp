@@ -91,9 +91,9 @@
             });
     </script>
 
-    <div class="card-holder">
-        <div class="card">
         {% if current_user.is_authenticated %}
+        <div class="card-holder">
+        <div class="card">
         <h4><i>Review</i></h4>
         <hr>
         <form method="post" action="">
@@ -141,9 +141,9 @@
     </script>
  
         </form>
-        {% endif %}
         </div>
     </div/>
+        {% endif %}
     </div>
 {% endblock %}
 
