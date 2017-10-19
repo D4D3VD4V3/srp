@@ -1,22 +1,30 @@
 {% extends "basic_layout.html" %}
 {% from "macros.html" import render_field %}
-{% block title %} Subjects {% endblock %}
+{% block title %} Review {% endblock %}
 {% block content %}
     {{ super() }}
     {% block styles %}
         {{ super() }}
         <link href=" {{ url_for("static", filename="css/rating.min.css") }}" media="all" rel="stylesheet" type="text/css" />
+        <link href=" {{ url_for("static", filename="css/profile.css") }}" media="all" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
     {% endblock %}
 
+    <div class ="card-holder">
+        <div class="card">
+            <div class="container">
+                <h4>{{ prof.name }}</h4> <br>
+                Speciality: {{ prof.spec }} <br>
+                Qualification: {{ prof.qual }} <br>
+                Experience: {{ prof.exp }} years <br>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
-        Professor Name: {{ prof.name }} <br>
-        Speciality: {{ prof.spec }} <br>
-        Qualification: {{ prof.qual }} <br>
-        Experience: {{ prof.exp }} years <br>
-
+        <!--<div class="card-holder">-->
+        <!--<div class="card">-->
         
         {% if current_user.is_authenticated %}
         <form method="post" action="">
@@ -34,7 +42,8 @@
                 {% endif %}
             </dl>
 
-
+        <!--</div>-->
+        <!--</div>-->
             <div id="theModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -51,6 +60,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
     <script type="text/javascript" src="{{ url_for("static", filename="js/rating.min.js") }}"></script>
     <script>
@@ -67,7 +77,11 @@
         {% endif %}
 
 
-<canvas id="chart_el" width="600" height="400"></canvas>
+<div class="card-holder">
+    <div class="card">
+        <canvas id="chart_el" width="600" height="400"></canvas>
+    </div>
+</div>
         <script>
             var _labels = [];
             var _data = [];
