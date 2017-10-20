@@ -46,5 +46,5 @@ class ReviewForm(FlaskForm):
     Punctual = BooleanField("Is the professor punctual?:")
     DeathByPPT = BooleanField("Does the professor rely only on ppt's?:")
     FairPaperEvaluation = BooleanField("Does the professor evaluate question papers in a fair manner?:")
-    Rating = IntegerField()
+    Rating = IntegerField(validators=[DataRequired("Please give a rating")])
     Submit = SubmitField("Submit")
