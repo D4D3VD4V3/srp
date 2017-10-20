@@ -102,13 +102,22 @@
                 {{ render_field(form.Punctual) }}
                 {{ render_field(form.DeathByPPT) }}
                 {{ render_field(form.FairPaperEvaluation) }}
-                {{ render_field(form.Rating, id="hiddenrating", type="hidden") }}
-                <div id="star" class="c-rating"></div>
-                {% if disabled == "True"%}
-                    <button type="button" class="btn btn-success btn-md" disabled data-toggle="tooltip" title="Already reviewed this professor">Submit</button>
-                {% else %}
-                    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#theModal">Submit</button>
-                {% endif %}
+                <div class="centerdiv">
+                    {{ render_field(form.Rating, id="hiddenrating", type="hidden") }}
+                </div>
+
+                <div class="centerdiv">
+                    <div id="star" class="c-rating"></div>
+                </div>
+
+                <div class="centerdiv">
+                    {% if disabled == "True"%}
+                        <button type="button" class="btn btn-danger btn-md" disabled data-toggle="tooltip" title="Already reviewed this professor">Submit</button>
+                    {% else %}
+                        <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#theModal">Submit</button>
+                    {% endif %}
+                </div>
+                </div>
             </dl>
 
             <div id="theModal" class="modal fade" role="dialog">
